@@ -39,7 +39,8 @@ package com.magiclick.video.flashVCR {
 		private var _displayTimer:Timer;
 		private var _camera:Camera;
 		private var _videoAspectRatio:Number;
-				private var init_videoPlayBack_width:Number;
+		
+		private var init_videoPlayBack_width:Number;
 		private var init_videoPlayBack_height:Number;
 		private var init_videoPlayback_position:Point;
 		
@@ -59,7 +60,8 @@ package com.magiclick.video.flashVCR {
 			
 			display_update_timer = new Timer(_DISPLAY_TIMER_UPDATE_DELAY);
 			display_update_timer.addEventListener(TimerEvent.TIMER, updateDisplay);
-						init_videoPlayBack_width = _videoPlayback.width;
+			
+			init_videoPlayBack_width = _videoPlayback.width;
 			init_videoPlayBack_height = _videoPlayback.height;
 			init_videoPlayback_position = new Point(_videoPlayback.x, _videoPlayback.y);
 		}
@@ -161,7 +163,8 @@ package com.magiclick.video.flashVCR {
 		}
 		
 		protected function fitToAspectRatio(vid_height:Number,vid_width:Number):void{
-//			var vid_width = infoObject.width;//			var vid_height = infoObject.height;
+//			var vid_width = infoObject.width;
+//			var vid_height = infoObject.height;
 			
 			_videoAspectRatio = vid_height / vid_width;
 			_init_videoAspectRatio=init_videoPlayBack_height / init_videoPlayBack_width;
@@ -249,6 +252,11 @@ package com.magiclick.video.flashVCR {
 		protected function onDisplayUpdate(percentTime:Number):void{}
 		
 		protected function onStreamStop():void {
+			
+			_stream.close();
+			f_initilized = true;
+			f_streamAttached = true;
+			f_loaded = false;
 		}
 		
 		protected function onStreamDownloadProgress(percentageLoaded:Number):void{
